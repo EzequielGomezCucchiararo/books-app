@@ -1,4 +1,5 @@
 import { BookRepository } from '../domain/BookRepository';
+import { BookNotFoundError } from '../domain/errors';
 
 export class DeleteBook {
   private _bookRepository: BookRepository;
@@ -11,7 +12,7 @@ export class DeleteBook {
     const book = await this._bookRepository.findById(bookId);
 
     if (!book) {
-      throw new Error(`Book with ID ${bookId} not found`);
+      throw BookNotFoundError.create(bookId);
     }
 
     return this._bookRepository.delete(book);

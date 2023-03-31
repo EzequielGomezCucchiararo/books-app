@@ -1,5 +1,3 @@
 import { InMemoryBookRepository } from './InMemoryBookRepository';
 
-export {
-  InMemoryBookRepository
-}
+export { InMemoryBookRepository };

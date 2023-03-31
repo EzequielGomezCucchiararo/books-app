@@ -9,7 +9,7 @@
     "start:dev": "nodemon",
     "test": "jest --verbose --config ./jest.config.js",
     "test:tdd": "npm run test -- --verbose --watch",
-    "format": "prettier --write \"src/**/*.ts\""
+    "format": "prettier --write \"src/**/*.+(js|jsx|json|ts|tsx)\""
   },
   "author": "Ezequiel Gomez",
   "license": "ISC",

@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
-import { AddBook } from '../../application/AddBook';
+import { AddBook } from '../../application';
+import { DuplicatedBookError } from '../../domain/errors';
 
 export class AddNewBookController {
   private readonly _addBook: AddBook;
@@ -14,8 +15,12 @@ export class AddNewBookController {
       const book = await this._addBook.execute({ title });
 
       res.status(201).json(book);
-    } catch (e) {
-      res.status(500).json({ error: e });
+    } catch (error) {
+      if (error instanceof DuplicatedBookError) {
+        res.status(409).json({ error });
+      }
+
+      res.status(500).json({ error });
     }
   }
 }

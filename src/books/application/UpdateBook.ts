@@ -2,6 +2,7 @@ import { BookRepository } from '../domain/BookRepository';
 import { Book } from '../domain/Book';
 import { BookFactory } from '../domain/BookFactory';
 import { BookMapper } from './mappers/BookMapper';
+import { BookNotFoundError } from '../domain/errors';
 
 export type UpdateBookPayload = Partial<Book>;
 
@@ -24,7 +25,7 @@ export class UpdateBook {
     const book = await this._bookRepository.findById(bookId);
 
     if (!book) {
-      throw new Error(`Book with ID ${bookId} not found`);
+      throw BookNotFoundError.create(bookId);
     }
 
     const bookData = this._bookMapper.mapBookToBookData(book);

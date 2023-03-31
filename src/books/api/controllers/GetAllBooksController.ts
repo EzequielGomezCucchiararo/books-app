@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { GetAllBooks } from '../../application/GetAllBooks';
+import { GetAllBooks } from '../../application';
 
 export class GetAllBooksController {
   private readonly _getAllBooks: GetAllBooks;
@@ -12,8 +12,8 @@ export class GetAllBooksController {
       const books = await this._getAllBooks.execute();
 
       res.status(201).json(books);
-    } catch (e) {
-      res.status(500).json({ error: e });
+    } catch (error) {
+      res.status(500).json({ error });
     }
   }
 }

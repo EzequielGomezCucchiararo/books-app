@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
-import { UpdateBookPayload, UpdateBook } from '../../application/UpdateBook';
+import { UpdateBook } from '../../application';
+import { UpdateBookPayload } from '../../application/UpdateBook';
+import { BookNotFoundError } from '../../domain/errors';
 
 export class UpdateBookController {
   private readonly _updateBook: UpdateBook;
@@ -17,7 +19,10 @@ export class UpdateBookController {
 
       res.status(201).json(updatedBook);
     } catch (error) {
-      // TODO: Manage errors based on error type
+      if (error instanceof BookNotFoundError) {
+        res.status(404).json({ error });
+      }
+
       res.status(500).send('Internal Server Error');
     }
   }

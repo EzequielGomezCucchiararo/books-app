@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
-import { DeleteBook } from '../../application/DeleteBook';
+import { DeleteBook } from '../../application';
+import { BookNotFoundError } from '../../domain/errors';
 
 export class DeleteBookController {
   private readonly _deleteBook: DeleteBook;
@@ -15,7 +16,10 @@ export class DeleteBookController {
 
       res.status(201).json(response);
     } catch (error) {
-      // TODO: Manage errors based on error type
+      if (error instanceof BookNotFoundError) {
+        res.status(404).json({ error });
+      }
+
       res.status(500).send('Internal Server Error');
     }
   }

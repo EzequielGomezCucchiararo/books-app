@@ -1,5 +1,3 @@
 import { UuidGenerator } from './utils/UuidGenerator';
 
-export {
-  UuidGenerator
-}
+export { UuidGenerator };

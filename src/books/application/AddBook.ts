@@ -1,6 +1,7 @@
 import { BookFactory } from '../domain/BookFactory';
 import { BookRepository } from '../domain/BookRepository';
 import { BookData, BookMapper } from './mappers/BookMapper';
+import { DuplicatedBookError } from '../domain/errors';
 
 interface AddBookPayload {
   title: string;
@@ -24,7 +25,7 @@ export class AddBook {
     const existingBooks = await this._bookRepository.findByTitle(title);
 
     if (existingBooks.length > 0) {
-      throw new Error(`A book with the title "${title}" already exists`);
+      throw DuplicatedBookError.create(title);
     }
 
     const book = this._bookFactory.createBook({ title });
