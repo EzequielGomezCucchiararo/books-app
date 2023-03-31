@@ -1,9 +1,11 @@
 import express from 'express';
-import { BooksController } from './controller';
+import { bootstrap } from './bootstrap';
 
+const { addNewBookHandler, getAllBooksHandler, updateBookHandler} = bootstrap();
 const router = express.Router();
-const booksController = new BooksController();
 
-router.post('/', booksController.addNewBook);
+router.get('/', getAllBooksHandler);
+router.post('/', addNewBookHandler);
+router.put('/:id', updateBookHandler);
 
 export { router as booksRouter };
