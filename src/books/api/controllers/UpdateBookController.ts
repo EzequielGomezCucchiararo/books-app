@@ -11,10 +11,10 @@ export class UpdateBookController {
   }
 
   async execute(req: Request, res: Response) {
-    try {
-      const bookId = req.params.id;
-      const bookUpdates: UpdateBookPayload = req.body;
+    const bookId = req.params.id;
+    const bookUpdates: UpdateBookPayload = req.body;
 
+    try {
       const updatedBook = await this._updateBook.execute(bookId, bookUpdates);
 
       res.status(201).json(updatedBook);

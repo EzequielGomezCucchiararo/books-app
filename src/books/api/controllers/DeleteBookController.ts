@@ -10,8 +10,9 @@ export class DeleteBookController {
   }
 
   async execute(req: Request, res: Response) {
+    const bookId = req.params.id;
+
     try {
-      const bookId = req.params.id;
       const response = await this._deleteBook.execute(bookId);
 
       res.status(201).json(response);

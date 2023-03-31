@@ -8,6 +8,7 @@ export class AddNewBookController {
   constructor(addBook: AddBook) {
     this._addBook = addBook;
   }
+
   async execute(req: Request, res: Response) {
     const { title } = req.body;
 
