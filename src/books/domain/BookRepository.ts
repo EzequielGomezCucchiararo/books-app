@@ -5,5 +5,5 @@ export interface BookRepository {
   findByTitle(title: string): Promise<Book[]>;
   getAllBooks(): Book[];
   save(book: Book): Promise<void>;
-  delete(book: Book): Promise<void>;
+  delete(book: Book): Promise<string>;
 }

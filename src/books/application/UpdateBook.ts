@@ -3,14 +3,18 @@ import { Book } from '../domain/Book';
 import { BookFactory } from '../domain/BookFactory';
 import { BookMapper } from './mappers/BookMapper';
 
-export type UpdateBookPayload = Partial<Book>
+export type UpdateBookPayload = Partial<Book>;
 
 export class UpdateBook {
   private _bookFactory: BookFactory;
   private _bookRepository: BookRepository;
   private _bookMapper: BookMapper;
 
-  constructor(bookFactory: BookFactory, bookRepository: BookRepository, bookMapper: BookMapper) {
+  constructor(
+    bookFactory: BookFactory,
+    bookRepository: BookRepository,
+    bookMapper: BookMapper
+  ) {
     this._bookFactory = bookFactory;
     this._bookRepository = bookRepository;
     this._bookMapper = bookMapper;

@@ -18,7 +18,7 @@ export class UpdateBookController {
       res.status(201).json(updatedBook);
     } catch (error) {
       // TODO: Manage errors based on error type
-      res.status(500).send("Internal Server Error");
+      res.status(500).send('Internal Server Error');
     }
   }
 }

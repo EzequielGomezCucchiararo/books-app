@@ -11,7 +11,11 @@ export class AddBook {
   private _bookRepository: BookRepository;
   private _bookMapper: BookMapper;
 
-  constructor(bookFactory: BookFactory, bookRepository: BookRepository, bookMapper: BookMapper) {
+  constructor(
+    bookFactory: BookFactory,
+    bookRepository: BookRepository,
+    bookMapper: BookMapper
+  ) {
     this._bookFactory = bookFactory;
     this._bookRepository = bookRepository;
     this._bookMapper = bookMapper;

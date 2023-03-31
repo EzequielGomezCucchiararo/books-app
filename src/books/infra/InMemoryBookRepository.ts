@@ -24,8 +24,10 @@ export class InMemoryBookRepository implements BookRepository {
     this._books.set(book.id, book);
   }
 
-  async delete(book: Book): Promise<void> {
+  async delete(book: Book): Promise<string> {
     this._books.delete(book.id);
+
+    return book.id;
   }
 
   getAllBooks(): Book[] {
