@@ -1,4 +1,4 @@
-import { UuidGenerator } from '../../shared/UuidGenerator';
+import { UuidGenerator } from '../../shared/utils/UuidGenerator';
 import { Book } from './Book';
 
 export class BookFactory {

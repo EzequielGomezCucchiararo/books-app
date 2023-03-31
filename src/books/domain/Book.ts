@@ -4,11 +4,19 @@ interface BookParams {
 }
 
 export class Book {
-  private _id: string;
-  private _title: string;
+  private readonly _id: string;
+  private readonly _title: string;
 
   constructor(params: BookParams) {
     this._id = params.id;
     this._title = params.title;
+  }
+
+  get id() {
+    return this._id;
+  }
+
+  get title() {
+    return this._title;
   }
 }
