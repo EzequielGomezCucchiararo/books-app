@@ -16,14 +16,14 @@ export class AddBook {
     this._bookRepository = bookRepository;
     this._bookMapper = bookMapper;
   }
-  public async execute(title: string): Promise<BookData> {
+  async execute({ title }: AddBookPayload): Promise<BookData> {
     const existingBooks = await this._bookRepository.findByTitle(title);
 
     if (existingBooks.length > 0) {
       throw new Error(`A book with the title "${title}" already exists`);
     }
 
-    const book = this._bookFactory.createBook(title);
+    const book = this._bookFactory.createBook({ title });
 
     await this._bookRepository.save(book);
 

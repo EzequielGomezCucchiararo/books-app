@@ -16,7 +16,7 @@ export class BooksController {
     const addBook = new AddBook(bookFactory, bookRepository, bookMapper);
 
     try {
-      const book = await addBook.execute(title);
+      const book = await addBook.execute({ title });
 
       res.status(201).json(book);
     } catch (e) {
