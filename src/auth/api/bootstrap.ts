@@ -1,5 +1,5 @@
 import { SignUpController } from './controllers';
-import { UserFactory } from '../domain/UserFactory';
+import { UserFactory } from '../domain';
 import { JsonUserRepository } from '../infra';
 import { UuidGenerator } from '../../shared';
 import { SignUp } from '../application';

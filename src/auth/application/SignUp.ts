@@ -1,5 +1,4 @@
-import { UserRepository } from '../domain/UserRepository';
-import { UserFactory } from '../domain/UserFactory';
+import { UserFactory, UserRepository } from '../domain';
 import { UserAlreadySignedUpError } from '../domain/errors';
 
 export class SignUp {
