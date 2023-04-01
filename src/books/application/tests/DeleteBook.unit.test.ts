@@ -18,7 +18,7 @@ const setup = () => {
 };
 
 describe('DeleteBook', () => {
-  it('should delete a book by the provided book ID', async () => {
+  test('should delete a book by the provided book ID', async () => {
     // Given
     const { book, mockBookRepository } = setup();
     const SUT = new DeleteBook(mockBookRepository);
@@ -33,7 +33,7 @@ describe('DeleteBook', () => {
     expect(mockBookRepository.delete).toHaveBeenCalledWith(book);
   });
 
-  it("should throw an error if the book doesn't exist", async () => {
+  test("should throw an error if the book doesn't exist", async () => {
     // Given
     const { book, mockBookRepository } = setup();
     const SUT = new DeleteBook(mockBookRepository);
