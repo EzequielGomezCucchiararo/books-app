@@ -8,7 +8,7 @@ const addNewBookSchema = Joi.object({
 const addNewBookValidator = (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   const { error } = addNewBookSchema.validate(req.body);
 

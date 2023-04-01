@@ -41,15 +41,15 @@ solution, and a link to the deployed application.
 
 ## Running the project
 
-Once the repository is cloned locally:
+Once the repository is cloned locally and Docker client is properly installed
 
-### 1. Install dependencies
+### 1. Create the docker container
 
-    npm install
+    docker build -t my-app .
 
-### 2. Build the project
+### 2. Run it locally
 
-    npm run build
+    docker run -p 3000:3000 my-app
 
 ### 3. Running test:
     npm run test

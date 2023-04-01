@@ -15,7 +15,7 @@ export class AddBook {
   constructor(
     bookFactory: BookFactory,
     bookRepository: BookRepository,
-    bookMapper: BookMapper
+    bookMapper: BookMapper,
   ) {
     this._bookFactory = bookFactory;
     this._bookRepository = bookRepository;

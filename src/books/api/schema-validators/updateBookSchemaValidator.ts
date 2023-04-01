@@ -8,7 +8,7 @@ const updateBookSchema = Joi.object({
 const updateBookValidator = (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   const { error } = updateBookSchema.validate(req.params);
 

@@ -8,7 +8,7 @@ const deleteBookSchema = Joi.object({
 const deleteBookValidator = (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   const { error } = deleteBookSchema.validate(req.params);
 
