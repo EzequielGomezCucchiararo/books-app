@@ -12,8 +12,8 @@ export class GetAllBooksController {
       const books = await this._getAllBooks.execute();
 
       res.status(201).json(books);
-    } catch (error) {
-      res.status(500).json({ error });
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
     }
   }
 }

@@ -16,12 +16,12 @@ export class AddNewBookController {
       const book = await this._addBook.execute({ title });
 
       res.status(201).json(book);
-    } catch (error) {
+    } catch (error: any) {
       if (error instanceof DuplicatedBookError) {
-        res.status(409).json({ error });
+        res.status(409).json({ error: error.message });
       }
 
-      res.status(500).json({ error });
+      res.status(500).send({ error: 'Internal Server Error' });
     }
   }
 }

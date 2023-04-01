@@ -16,12 +16,12 @@ export class DeleteBookController {
       const response = await this._deleteBook.execute(bookId);
 
       res.status(201).json(response);
-    } catch (error) {
+    } catch (error: any) {
       if (error instanceof BookNotFoundError) {
-        res.status(404).json({ error });
+        res.status(404).json({ error: error.message });
       }
 
-      res.status(500).send('Internal Server Error');
+      res.status(500).send({ error: 'Internal Server Error' });
     }
   }
 }
