@@ -1,3 +1,4 @@
+import { InvalidCredentialsError } from './InvalidCredentialsError';
 import { UserAlreadySignedUpError } from './UserAlreadySignedUpError';
 
-export { UserAlreadySignedUpError };
+export { InvalidCredentialsError, UserAlreadySignedUpError };
