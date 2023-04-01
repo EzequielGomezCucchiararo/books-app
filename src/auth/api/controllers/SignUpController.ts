@@ -15,13 +15,13 @@ export class SignUpController {
     try {
       await this._signUp.execute(email, password);
 
-      res.status(201).json({ success: true });
+      return res.status(201).json({ success: true });
     } catch (error: any) {
       if (error instanceof UserAlreadySignedUpError) {
-        res.status(409).json({ error: error.message });
+        return res.status(409).json({ error: error.message });
       }
 
-      res.status(500).send({ error: 'Internal Server Error' });
+      return res.status(500).send({ error: 'Internal Server Error' });
     }
   }
 }

@@ -1,20 +1,25 @@
 import * as fs from 'fs';
 import * as path from 'path';
-
-import { User } from '../domain/User';
-import { UserFactory } from '../domain/UserFactory';
+import { User, UserFactory } from '../domain';
 import { UserMapper } from './mappers';
 import { UserData } from './mappers/UserMapper';
+import { PasswordEncryptor } from './PasswordEncryptor';
 
 const JSON_DATA_BASE_FILE_PATH = path.join(__dirname, 'users-db.json');
 
 export class JsonUserRepository {
   private userFactory: UserFactory;
   private userMapper: UserMapper;
+  private passwordEncryptor: PasswordEncryptor;
 
-  constructor(userFactory: UserFactory, userMapper: UserMapper) {
+  constructor(
+    userFactory: UserFactory,
+    userMapper: UserMapper,
+    passwordEncryptor: PasswordEncryptor,
+  ) {
     this.userFactory = userFactory;
     this.userMapper = userMapper;
+    this.passwordEncryptor = passwordEncryptor;
   }
 
   async findByEmail(email: string): Promise<User | null> {
@@ -27,8 +32,12 @@ export class JsonUserRepository {
   async save(user: User): Promise<void> {
     const data = await this.getData();
     const userData = this.userMapper.mapUserToUserData(user);
+    userData.password = await this.passwordEncryptor.hashPassword(
+      userData.password,
+    );
+
     const existingIndex = data.users.findIndex(
-      (u: UserData) => u.id === userData.id
+      (u: UserData) => u.id === userData.id,
     );
 
     if (existingIndex >= 0) {
@@ -38,6 +47,10 @@ export class JsonUserRepository {
     }
 
     await this.saveData(data);
+  }
+
+  async verifyPassword(user: User, password: string): Promise<boolean> {
+    return await this.passwordEncryptor.verifyPassword(password, user.password);
   }
 
   private async getData(): Promise<{ users: UserData[] }> {
@@ -68,7 +81,7 @@ export class JsonUserRepository {
           } else {
             resolve();
           }
-        }
+        },
       );
     });
   }

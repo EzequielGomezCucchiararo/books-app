@@ -17,13 +17,13 @@ export class UpdateBookController {
     try {
       const updatedBook = await this._updateBook.execute(bookId, bookUpdates);
 
-      res.status(201).json(updatedBook);
+      return res.status(201).json(updatedBook);
     } catch (error: any) {
       if (error instanceof BookNotFoundError) {
-        res.status(404).json({ error: error.message });
+        return res.status(404).json({ error: error.message });
       }
 
-      res.status(500).send({ error: 'Internal Server Error' });
+      return res.status(500).send({ error: 'Internal Server Error' });
     }
   }
 }
