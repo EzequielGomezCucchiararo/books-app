@@ -1,4 +1,4 @@
-import { UuidGenerator } from '../../shared/utils/UuidGenerator';
+import { UuidGenerator } from '../../shared';
 import { Book } from './Book';
 
 interface CreateBookParams {
