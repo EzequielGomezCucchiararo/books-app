@@ -30,7 +30,7 @@ export class InMemoryBookRepository implements BookRepository {
     return book.id;
   }
 
-  getAllBooks(): Book[] {
+  async getAllBooks(): Promise<Book[]> {
     return [...this._books.values()];
   }
 }

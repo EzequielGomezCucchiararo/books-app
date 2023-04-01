@@ -1,4 +1,4 @@
-import { BookRepository } from '../domain/BookRepository';
+import { BookRepository } from '../domain';
 import { BookNotFoundError } from '../domain/errors';
 
 export class DeleteBook {

@@ -1,3 +1,4 @@
 import { UuidGenerator } from './utils/UuidGenerator';
+import { authGuard } from './middlewares';
 
-export { UuidGenerator };
+export { authGuard, UuidGenerator };

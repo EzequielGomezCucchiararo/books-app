@@ -1,10 +1,17 @@
-import { Book } from '../domain/Book';
-import { BookRepository } from '../domain/BookRepository';
+import { BookRepository } from '../domain';
+import { BookData, BookMapper } from './mappers/BookMapper';
 
 export class GetAllBooks {
-  constructor(private readonly bookRepository: BookRepository) {}
+  private readonly bookMapper: BookMapper;
+  private readonly bookRepository: BookRepository;
 
-  async execute(): Promise<Book[]> {
-    return this.bookRepository.getAllBooks();
+  constructor(bookMapper: BookMapper, bookRepository: BookRepository) {
+    this.bookMapper = bookMapper;
+    this.bookRepository = bookRepository;
+  }
+
+  async execute(): Promise<BookData[]> {
+    const books = await this.bookRepository.getAllBooks();
+    return this.bookMapper.mapBooksToBooksData(books);
   }
 }

@@ -13,9 +13,9 @@ export class SignInController {
     const { email, password } = req.body;
 
     try {
-      await this._signIn.execute(email, password);
+      const { token } = await this._signIn.execute(email, password);
 
-      return res.status(201).json({ success: true });
+      return res.status(201).json({ success: true, token });
     } catch (error: any) {
       if (error instanceof InvalidCredentialsError) {
         return res.status(401).json({ error: error.message });

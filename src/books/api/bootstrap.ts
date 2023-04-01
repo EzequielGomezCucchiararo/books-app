@@ -1,9 +1,9 @@
-import { BookFactory } from '../domain/BookFactory';
+import { BookFactory } from '../domain';
 import { InMemoryBookRepository } from '../infra';
 import { UuidGenerator } from '../../shared';
 import {
-  BookMapper,
   AddBook,
+  BookMapper,
   DeleteBook,
   GetAllBooks,
   UpdateBook,
@@ -23,7 +23,7 @@ export function bootstrap() {
 
   const addBook = new AddBook(bookFactory, bookRepository, bookMapper);
   const deleteBook = new DeleteBook(bookRepository);
-  const getAllBooks = new GetAllBooks(bookRepository);
+  const getAllBooks = new GetAllBooks(bookMapper, bookRepository);
   const updateBook = new UpdateBook(bookFactory, bookRepository, bookMapper);
 
   const addNewBookController = new AddNewBookController(addBook);
@@ -35,7 +35,7 @@ export function bootstrap() {
     addNewBookHandler: addNewBookController.execute.bind(addNewBookController),
     deleteBookHandler: deleteBookController.execute.bind(deleteBookController),
     getAllBooksHandler: getAllBooksController.execute.bind(
-      getAllBooksController
+      getAllBooksController,
     ),
     updateBookHandler: updateBookController.execute.bind(updateBookController),
   };

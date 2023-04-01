@@ -1,3 +1,4 @@
+import jwt from 'jsonwebtoken';
 import { UserRepository } from '../domain';
 import { InvalidCredentialsError } from '../domain/errors';
 import { PasswordEncryptor } from '../infra';
@@ -14,7 +15,7 @@ export class SignIn {
     this._passwordEncryptor = passwordEncryptor;
   }
 
-  async execute(email: string, password: string): Promise<void> {
+  async execute(email: string, password: string): Promise<{ token: string }> {
     const user = await this._userRepository.findByEmail(email);
 
     if (
@@ -23,5 +24,14 @@ export class SignIn {
     ) {
       throw InvalidCredentialsError.create();
     }
+
+    // Generate a JWT token with the user's ID and name as the payload
+    const token = jwt.sign(
+      { id: user.id, email: user.email },
+      process.env.JWT_SECRET as string,
+    );
+
+    // Return the token in the response
+    return { token };
   }
 }

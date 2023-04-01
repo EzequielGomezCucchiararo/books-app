@@ -1,6 +1,4 @@
-import { BookRepository } from '../domain/BookRepository';
-import { Book } from '../domain/Book';
-import { BookFactory } from '../domain/BookFactory';
+import { Book, BookFactory, BookRepository } from '../domain';
 import { BookMapper } from './mappers/BookMapper';
 import { BookNotFoundError } from '../domain/errors';
 
@@ -14,7 +12,7 @@ export class UpdateBook {
   constructor(
     bookFactory: BookFactory,
     bookRepository: BookRepository,
-    bookMapper: BookMapper
+    bookMapper: BookMapper,
   ) {
     this._bookFactory = bookFactory;
     this._bookRepository = bookRepository;
