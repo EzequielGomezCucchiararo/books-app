@@ -43,16 +43,28 @@ solution, and a link to the deployed application.
 
 Once the repository is cloned locally and Docker client is properly installed
 
+### 0. Create .env file at root level
+
+With the following values
+
+PORT=4200
+JWT_SECRET=[anything you want]
+
 ### 1. Create the docker container
 
-    docker build -t my-app .
+    docker build -t books-app .
 
 ### 2. Run it locally
 
-    docker run -p 3000:3000 my-app
+    docker run -p 4200:4200 books-app
 
 ### 3. Running test:
     npm run test
+
+### 4. Running locally without Docker
+
+    npm run install
+    npm run start
 
 ### Stack:
 
