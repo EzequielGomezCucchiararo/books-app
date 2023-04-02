@@ -48,6 +48,23 @@ class BooksRepository {
       throw new Error('Failed to remove book');
     }
   }
+
+  async update(id, title) {
+    const response = await fetch(`${this.apiUrl}/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.authService.getToken()}`,
+      },
+      body: JSON.stringify({ title }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to update the book');
+    }
+
+    return response.json();
+  }
 }
 
 export default new BooksRepository(authService);

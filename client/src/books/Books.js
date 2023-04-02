@@ -8,6 +8,8 @@ const BooksHomePage = ({ onLogout }) => {
   const [message, setMessage] = useState('');
   const [books, setBooks] = useState([]);
   const [newBookTitle, setNewBookTitle] = useState('');
+  const [editBookId, setEditBookId] = useState('');
+  const [editBookTitle, setEditBookTitle] = useState('');
 
   const handleInputChange = (e) => {
     setNewBookTitle(e.target.value);
@@ -19,7 +21,24 @@ const BooksHomePage = ({ onLogout }) => {
       setBooks(books.filter((book) => book.id !== id));
       setMessage('');
     } catch (error) {
-      // Handle the error here
+      console.log(error);
+    }
+  };
+
+  const handleEditBook = async () => {
+    try {
+      await booksRepository.update(editBookId, editBookTitle);
+      const newBooks = books.map((book) => {
+        if (book.id === editBookId) {
+          return { ...book, title: editBookTitle };
+        }
+        return book;
+      });
+      setBooks(newBooks);
+      setEditBookId('');
+      setEditBookTitle('');
+      setMessage('');
+    } catch (error) {
       console.log(error);
     }
   };
@@ -35,13 +54,16 @@ const BooksHomePage = ({ onLogout }) => {
     }
   };
 
+  const handleEditInputChange = (e) => {
+    setEditBookTitle(e.target.value);
+  };
+
   useEffect(() => {
     async function fetchBooks() {
       try {
         const books = await booksRepository.getAll();
         setBooks(books);
       } catch (error) {
-        // Handle the error here
         console.log(error);
       }
     }
@@ -65,12 +87,29 @@ const BooksHomePage = ({ onLogout }) => {
         {books.map((book) => (
           <sc.ListItem key={book.id}>
             {book.title}
-            <sc.RemoveButton onClick={() => handleRemoveBook(book.id)}>
-              <AiOutlineCloseCircle />
-            </sc.RemoveButton>
+            <sc.BookActions>
+              <sc.EditButton onClick={() => setEditBookId(book.id)}>
+                Edit
+              </sc.EditButton>
+              <sc.RemoveButton onClick={() => handleRemoveBook(book.id)}>
+                <AiOutlineCloseCircle />
+              </sc.RemoveButton>
+            </sc.BookActions>
           </sc.ListItem>
         ))}
       </sc.List>
+      {editBookId && (
+        <sc.EditContainer>
+          <sc.Input
+            type="text"
+            placeholder="Edit the title"
+            value={editBookTitle}
+            onChange={handleEditInputChange}
+          />
+          <sc.Button onClick={handleEditBook}>Save</sc.Button>
+          <sc.Button onClick={() => setEditBookId('')}>Cancel</sc.Button>
+        </sc.EditContainer>
+      )}
       {message && <sc.ErrorMessage>{message}</sc.ErrorMessage>}
     </sc.Container>
   );
