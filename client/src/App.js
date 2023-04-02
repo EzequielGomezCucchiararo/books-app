@@ -1,22 +1,36 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Signup from './auth/signup/SignUp';
 import BooksHomePage from './books/Books';
+import authService from './auth/AuthService';
+import * as sc from './App.styled';
 
 function App() {
-  const [token, setToken] = useState('');
   const [signedIn, setSignedIn] = useState(false);
 
-  const handleAuthAction = (newToken) => {
-    setToken(newToken);
-    setSignedIn(true);
+  useEffect(() => {
+    setSignedIn(authService.isLoggedIn());
+  }, []);
+
+  const handleAuthActionCompleted = () => {
+    setSignedIn(authService.isLoggedIn());
+  };
+
+  const handleLogout = () => {
+    authService.signout();
+    setSignedIn(false);
   };
 
   return (
     <div>
-      {!signedIn ? (
-        <Signup onAuthActionCompleted={handleAuthAction} />
+      {signedIn ? (
+        <sc.AppContainer>
+          <sc.AuthActions>
+            <sc.LogoutButton onClick={handleLogout}>Log out</sc.LogoutButton>
+          </sc.AuthActions>
+          <BooksHomePage />
+        </sc.AppContainer>
       ) : (
-        <BooksHomePage token={token} />
+        <Signup onAuthActionCompleted={handleAuthActionCompleted} />
       )}
     </div>
   );

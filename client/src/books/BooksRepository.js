@@ -1,13 +1,15 @@
+import authService from '../auth/AuthService';
+
 class BooksRepository {
-  constructor(token) {
-    this.token = token;
+  constructor(authService) {
+    this.authService = authService;
     this.apiUrl = 'http://localhost:4200/api/v1/books';
   }
 
   async getAll() {
     const response = await fetch(this.apiUrl, {
       headers: {
-        Authorization: `Bearer ${this.token}`,
+        Authorization: `Bearer ${this.authService.getToken()}`,
       },
     });
     if (!response.ok) {
@@ -22,7 +24,7 @@ class BooksRepository {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.token}`,
+        Authorization: `Bearer ${this.authService.getToken()}`,
       },
       body: JSON.stringify({ title }),
     });
@@ -38,7 +40,7 @@ class BooksRepository {
     const response = await fetch(`${this.apiUrl}/${id}`, {
       method: 'DELETE',
       headers: {
-        Authorization: `Bearer ${this.token}`,
+        Authorization: `Bearer ${this.authService.getToken()}`,
       },
     });
 
@@ -48,4 +50,4 @@ class BooksRepository {
   }
 }
 
-export default BooksRepository;
+export default new BooksRepository(authService);

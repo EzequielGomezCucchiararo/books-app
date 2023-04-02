@@ -5,7 +5,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 2rem auto;
-  max-width: 600px;
+  min-width: 600px;
 `;
 
 export const InputContainer = styled.div`

@@ -11,7 +11,7 @@ class AuthService {
     return localStorage.getItem(this.tokenKey);
   }
 
-  removeToken() {
+  signout() {
     localStorage.removeItem(this.tokenKey);
   }
 
@@ -34,6 +34,7 @@ class AuthService {
     }
 
     const { token } = await response.json();
+
     this.setToken(token);
   }
 
