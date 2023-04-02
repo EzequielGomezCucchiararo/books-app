@@ -27,6 +27,11 @@ const BooksHomePage = ({ onLogout }) => {
 
   const handleEditBook = async () => {
     try {
+      if (!editBookTitle) {
+        setEditBookId('');
+        return;
+      }
+
       await booksRepository.update(editBookId, editBookTitle);
       const newBooks = books.map((book) => {
         if (book.id === editBookId) {

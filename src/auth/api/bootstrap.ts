@@ -1,11 +1,10 @@
 import { SignUpController } from './controllers';
 import { UserFactory } from '../domain';
-import { JsonUserRepository } from '../infra';
+import { JsonUserRepository, PasswordEncryptor } from '../infra';
 import { UuidGenerator } from '../../shared';
 import { SignIn, SignUp } from '../application';
 import { UserMapper } from '../infra/mappers';
 import { SignInController } from './controllers/SignInController';
-import { PasswordEncryptor } from '../infra/PasswordEncryptor';
 
 export function bootstrap() {
   const uuidGenerator = new UuidGenerator();
