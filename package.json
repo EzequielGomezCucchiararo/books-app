@@ -4,7 +4,7 @@
   "description": "FS code challenge",
   "main": "app.js",
   "scripts": {
-    "build": "npm run format && rimraf ./build && tsc",
+    "build": "rimraf ./build && cd client && npm install && npm run build && cd .. && tsc",
     "start": "npm run build && node build/index.js",
     "start:dev": "nodemon",
     "test": "jest --verbose --config ./jest.config.js",
