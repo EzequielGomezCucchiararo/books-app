@@ -1,5 +1,4 @@
-import { Book } from '../domain/Book';
-import { BookRepository } from '../domain/BookRepository';
+import { Book, BookRepository } from '../domain';
 
 export class InMemoryBookRepository implements BookRepository {
   private _books: Map<string, Book> = new Map();

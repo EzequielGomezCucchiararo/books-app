@@ -1,5 +1,4 @@
-import { BookFactory } from '../domain/BookFactory';
-import { BookRepository } from '../domain/BookRepository';
+import { BookFactory, BookRepository } from '../domain';
 import { BookData, BookMapper } from './mappers/BookMapper';
 import { DuplicatedBookError } from '../domain/errors';
 
