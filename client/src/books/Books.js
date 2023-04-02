@@ -5,6 +5,7 @@ import * as sc from './Books.styled';
 import booksRepository from './BooksRepository';
 
 const BooksHomePage = ({ onLogout }) => {
+  const [message, setMessage] = useState('');
   const [books, setBooks] = useState([]);
   const [newBookTitle, setNewBookTitle] = useState('');
 
@@ -15,10 +16,11 @@ const BooksHomePage = ({ onLogout }) => {
   const handleRemoveBook = async (id) => {
     try {
       await booksRepository.remove(id);
-      // Remove the book from the local state
       setBooks(books.filter((book) => book.id !== id));
+      setMessage('');
     } catch (error) {
       // Handle the error here
+      console.log(error);
     }
   };
 
@@ -27,8 +29,9 @@ const BooksHomePage = ({ onLogout }) => {
       const newBook = await booksRepository.add(newBookTitle);
       setBooks([...books, newBook]);
       setNewBookTitle('');
+      setMessage('');
     } catch (error) {
-      // Handle the error here
+      setMessage('Book already in the database');
     }
   };
 
@@ -39,6 +42,7 @@ const BooksHomePage = ({ onLogout }) => {
         setBooks(books);
       } catch (error) {
         // Handle the error here
+        console.log(error);
       }
     }
 
@@ -67,6 +71,7 @@ const BooksHomePage = ({ onLogout }) => {
           </sc.ListItem>
         ))}
       </sc.List>
+      {message && <sc.ErrorMessage>{message}</sc.ErrorMessage>}
     </sc.Container>
   );
 };

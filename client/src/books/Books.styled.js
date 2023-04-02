@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 
+export const ErrorMessage = styled.div`
+  color: chocolate;
+  margin-top: 20px;
+`;
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
