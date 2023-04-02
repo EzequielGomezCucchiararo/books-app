@@ -6,13 +6,13 @@ COPY package*.json ./
 
 RUN npm install
 
-# Code for production
-# RUN npm ci --only=production
+COPY client ./client
+
+RUN cd client && npm install && npm run build
 
 COPY . .
 
-EXPOSE 3000
+EXPOSE 4200
 
-RUN npm run build
-
+# Start the Express app
 CMD [ "node", "build/index.js" ]
