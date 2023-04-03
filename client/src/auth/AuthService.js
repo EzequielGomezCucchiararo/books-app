@@ -21,7 +21,7 @@ class AuthService {
   }
 
   async signin({ email, password }) {
-    const response = await fetch(`http://localhost:8080/api/v1/auth/sign-in`, {
+    const response = await fetch(`http://booksapp-env.eba-edf4augm.eu-west-3.elasticbeanstalk.com/api/v1/auth/sign-in`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ class AuthService {
   }
 
   async signup({ email, password }) {
-    const response = await fetch(`http://localhost:8080/api/v1/auth/sign-up`, {
+    const response = await fetch(`http://booksapp-env.eba-edf4augm.eu-west-3.elasticbeanstalk.com/api/v1/auth/sign-up`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
