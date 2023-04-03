@@ -36,6 +36,8 @@ class AuthService {
     const { token } = await response.json();
 
     this.setToken(token);
+
+    return token;
   }
 
   async signup({ email, password }) {
@@ -52,6 +54,7 @@ class AuthService {
     }
 
     const { token } = await response.json();
+
     this.setToken(token);
 
     return token;

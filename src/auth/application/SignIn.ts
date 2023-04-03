@@ -25,13 +25,12 @@ export class SignIn {
       throw InvalidCredentialsError.create();
     }
 
-    // Generate a JWT token with the user's ID and name as the payload
+    // TODO: Encapsulate it and pass it as dependency
     const token = jwt.sign(
       { id: user.id, email: user.email },
       process.env.JWT_SECRET as string,
     );
 
-    // Return the token in the response
     return { token };
   }
 }

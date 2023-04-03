@@ -58,6 +58,10 @@ JWT_SECRET=[anything you want]
 
     docker run -p 4200:4200 books-app
 
+#### Use the app
+
+Go to http://localhost:4200/
+
 ### 3. Running test:
     npm run test
 
