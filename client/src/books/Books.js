@@ -93,28 +93,34 @@ const BooksHomePage = ({ onLogout }) => {
           <sc.ListItem key={book.id}>
             {book.title}
             <sc.BookActions>
-              <sc.EditButton onClick={() => setEditBookId(book.id)}>
-                Edit
-              </sc.EditButton>
-              <sc.RemoveButton onClick={() => handleRemoveBook(book.id)}>
-                <AiOutlineCloseCircle />
-              </sc.RemoveButton>
+              {editBookId !== book.id && (
+                <div>
+                  <sc.EditButton onClick={() => setEditBookId(book.id)}>
+                    Edit
+                  </sc.EditButton>
+                  <sc.RemoveButton onClick={() => handleRemoveBook(book.id)}>
+                    <AiOutlineCloseCircle />
+                  </sc.RemoveButton>
+                </div>
+              )}
+              {editBookId === book.id && (
+                <sc.EditContainer>
+                  <sc.Input
+                    type="text"
+                    placeholder="Write the new title..."
+                    value={editBookTitle}
+                    onChange={handleEditInputChange}
+                  />
+                  <sc.Button onClick={handleEditBook}>Save</sc.Button>
+                  <sc.Button onClick={() => setEditBookId('')}>
+                    Cancel
+                  </sc.Button>
+                </sc.EditContainer>
+              )}
             </sc.BookActions>
           </sc.ListItem>
         ))}
       </sc.List>
-      {editBookId && (
-        <sc.EditContainer>
-          <sc.Input
-            type="text"
-            placeholder="Edit the title"
-            value={editBookTitle}
-            onChange={handleEditInputChange}
-          />
-          <sc.Button onClick={handleEditBook}>Save</sc.Button>
-          <sc.Button onClick={() => setEditBookId('')}>Cancel</sc.Button>
-        </sc.EditContainer>
-      )}
       {message && <sc.ErrorMessage>{message}</sc.ErrorMessage>}
     </sc.Container>
   );

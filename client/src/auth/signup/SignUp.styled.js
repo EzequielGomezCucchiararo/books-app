@@ -55,3 +55,9 @@ export const ToggleContainer = styled.div`
     }
   }
 `;
+
+export const ErrorMessage = styled.div`
+  color: chocolate;
+  margin-top: 20px;
+  text-align: center;
+`;

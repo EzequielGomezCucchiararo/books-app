@@ -3,6 +3,7 @@ import * as sc from './SignUp.styled';
 import authService from '../AuthService';
 
 const Signup = ({ onAuthActionCompleted }) => {
+  const [message, setMessage] = useState('');
   const [authOption, setViewOption] = useState('signup'); // initialize to 'signup'
   const [formData, setFormData] = useState({
     email: '',
@@ -26,8 +27,9 @@ const Signup = ({ onAuthActionCompleted }) => {
     try {
       const token = await authService[authOption](formData);
       onAuthActionCompleted(token);
+      setMessage('');
     } catch (error) {
-      console.error(error);
+      setMessage(error.message);
     }
   };
 
@@ -72,6 +74,7 @@ const Signup = ({ onAuthActionCompleted }) => {
         />
         <sc.Button type="submit">Sign up</sc.Button>
       </sc.Form>
+      {message && <sc.ErrorMessage>{message}</sc.ErrorMessage>}
     </div>
   );
 };

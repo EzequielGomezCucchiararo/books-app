@@ -13,9 +13,9 @@ export class SignUpController {
     const { email, password } = req.body;
 
     try {
-      await this._signUp.execute(email, password);
+      const { token } = await this._signUp.execute(email, password);
 
-      return res.status(201).json({ success: true });
+      return res.status(201).json({ success: true, token });
     } catch (error: any) {
       if (error instanceof UserAlreadySignedUpError) {
         return res.status(409).json({ error: error.message });

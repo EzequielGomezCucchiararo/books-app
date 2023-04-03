@@ -10,7 +10,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 2rem auto;
-  min-width: 600px;
+  min-width: 1200px;
 `;
 
 export const InputContainer = styled.div`
@@ -37,6 +37,7 @@ export const Button = styled.button`
   font-weight: bold;
   border: none;
   cursor: pointer;
+  margin-left: 5px;
   transition: background-color 0.2s ease-in-out;
 
   &:hover {
@@ -77,7 +78,6 @@ export const RemoveButton = styled.button`
 export const EditContainer = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 1rem;
 
   input[type='text'] {
     flex: 1;
@@ -85,6 +85,7 @@ export const EditContainer = styled.div`
     margin-right: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 4px;
+    width: 300px;
   }
 `;
 

@@ -1,6 +1,8 @@
 class AuthService {
   constructor() {
     this.tokenKey = '';
+    // TODO: Properly pass this as a env var (tricky with server side render)
+    this.apiUrl = `http://booksapp-env.eba-edf4augm.eu-west-3.elasticbeanstalk.com/api/v1/auth`;
   }
 
   setToken(token) {
@@ -21,7 +23,7 @@ class AuthService {
   }
 
   async signin({ email, password }) {
-    const response = await fetch(`http://booksapp-env.eba-edf4augm.eu-west-3.elasticbeanstalk.com/api/v1/auth/sign-in`, {
+    const response = await fetch(`${this.apiUrl}/sign-in`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -30,6 +32,10 @@ class AuthService {
     });
 
     if (!response.ok) {
+      if (response.status === 401) {
+        throw new Error('Wrong email or password');
+      }
+
       throw new Error('Login failed');
     }
 
@@ -41,7 +47,7 @@ class AuthService {
   }
 
   async signup({ email, password }) {
-    const response = await fetch(`http://booksapp-env.eba-edf4augm.eu-west-3.elasticbeanstalk.com/api/v1/auth/sign-up`, {
+    const response = await fetch(`${this.apiUrl}/sign-up`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -50,6 +56,10 @@ class AuthService {
     });
 
     if (!response.ok) {
+      if (response.status === 409) {
+        throw new Error('Email already used');
+      }
+
       throw new Error('Signup failed');
     }
 
