@@ -38,8 +38,11 @@ and password of the users who will use this application
 Please provide a link to a Git repository (e.g., GitHub, GitLab) containing the source code for the
 solution, and a link to the deployed application.
 
+## App deployed url
 
-## Running the project
+You can go to http://booksapp-env.eba-edf4augm.eu-west-3.elasticbeanstalk.com/ and test the app there or you can run it locally.
+
+## Running the project locally
 
 Once the repository is cloned locally and Docker client is properly installed
 
